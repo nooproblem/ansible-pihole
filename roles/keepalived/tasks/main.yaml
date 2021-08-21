@@ -42,6 +42,13 @@
     mode: 0755
   register: check_pihole
 
+- name: Copy notify_pihole.sh
+  copy:
+    dest: /etc/keepalived/notify_pihole.sh
+    src: notify_pihole.sh
+    mode: 0755
+  register: notify_pihole
+
 - name: Configure keepalived
   template:
     dest: /etc/keepalived/keepalived.conf
@@ -52,4 +59,4 @@
   service:
     name: keepalived
     state: restarted
-  when: check_pihole.changed == true or keepalived_conf.changed == true
+  when: check_pihole.changed or keepalived_conf.changed or notify_pihole.changed
