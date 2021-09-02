@@ -45,7 +45,6 @@
     dest: /etc/keepalived/notify_pihole.sh
     src: notify_pihole.sh
     mode: 0755
-  register: notify_pihole
 
 - name: Configure keepalived
   template:
